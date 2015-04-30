@@ -1,4 +1,4 @@
-include_directories( ${EIGEN2_INCLUDE_DIR} )
+include_directories( ${Eigen3_INCLUDE_DIRS} )
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR})
 INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/slom)
 

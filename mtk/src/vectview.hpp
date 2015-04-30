@@ -69,7 +69,12 @@ public:
 	//! construct from another @c vectview
 	vectview(const vectview &v) : base(v) {}
 	//! construct from Eigen::Block:
-#if MTK_EIGEN >= 300
+#if EIGEN_VERSION_AT_LEAST(3,2,0)
+	template<class Base>
+	vectview(Eigen::VectorBlock<Base, dim> block) : base(&block.coeffRef(0)) {}
+	template<class Base, bool PacketAccess>
+	vectview(Eigen::Block<Base, dim, 1, PacketAccess> block) : base(&block.coeffRef(0)) {}
+#elif EIGEN_VERSION_AT_LEAST(3,0,0)
 	template<class Base>
 	vectview(Eigen::VectorBlock<Base, dim> block) : base(&block.coeffRef(0)) {}
 	template<class Base, bool PacketAccess, bool DirectAccessStatus>
@@ -118,7 +123,12 @@ public:
 	 * Construct from Block
 	 * @todo adapt this, when Block gets const-correct
 	 */
-#if MTK_EIGEN >= 300
+#if EIGEN_VERSION_AT_LEAST(3,2,0)
+	template<class Base>
+	vectview(Eigen::VectorBlock<Base, dim> block) : base(&block.coeffRef(0)) {}
+	template<class Base, bool PacketAccess>
+	vectview(Eigen::Block<Base, dim, 1, PacketAccess> block) : base(&block.coeffRef(0)) {}
+#elif EIGEN_VERSION_AT_LEAST(3,0,0)
 	template<class Base>
 	vectview(Eigen::VectorBlock<Base, dim> block) : base(&block.coeffRef(0)) {}
 	template<class Base, bool PacketAccess, bool DirectAccessStatus>

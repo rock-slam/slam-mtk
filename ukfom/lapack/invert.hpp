@@ -43,7 +43,7 @@ namespace ukf {
 namespace lapack {
 
 // import most common Eigen types 
-USING_PART_OF_NAMESPACE_EIGEN
+using namespace Eigen;
 
 template<size_t P>
 Matrix<double, P, P> invert(const Matrix<double, P, P> &m)

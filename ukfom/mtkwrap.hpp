@@ -48,7 +48,7 @@ namespace ukfom {
 
 
 // import most common Eigen types 
-USING_PART_OF_NAMESPACE_EIGEN
+using namespace Eigen;
 
 
 /**
@@ -59,8 +59,8 @@ template<class M>
 struct mtkwrap : public M{
 	typedef mtkwrap<M> self;
 public:
-	typedef double scalar; // MTK only works with double
-	typedef scalar scalar_type;
+	//typedef double scalar; // MTK only works with double
+	typedef typename M::scalar scalar_type;
 
 	enum {
 		DOF = M::DOF
@@ -77,7 +77,7 @@ public:
 	 */
 	self& operator+=(const vectorized_type &delta_state)
 	{
-		assert(delta_state.stride() == DOF);
+		assert(delta_state.size() == DOF);
 		M::boxplus(delta_state.data());
 		return *this;
 	}
@@ -96,7 +96,7 @@ public:
 	const vectorized_type operator-(const self &other) const
 	{
 		vectorized_type result;
-		assert(result.stride()==DOF);
+		assert(result.rows()==DOF);
 		M::boxminus(result.data(), other);
 
 		return result;

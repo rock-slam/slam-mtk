@@ -43,7 +43,11 @@
 #include <boost/bind.hpp>
 
 #include <Eigen/Core>
-#include <Eigen/LU> 
+#include <Eigen/LU>
+
+#if EIGEN_VERSION_AT_LEAST(3,0,0)
+    #include <Eigen/Eigenvalues>
+#endif
 
 #include <Eigen/QR>
 
@@ -54,7 +58,7 @@
 namespace ukfom {
 	
 // import most common Eigen types 
-USING_PART_OF_NAMESPACE_EIGEN
+using namespace Eigen;
 
 template <typename state>
 class ukf {
@@ -90,7 +94,7 @@ public:
 		state_vector X(2 * n + 1);
 		generate_sigma_points(mu_, sigma_, X);
 		
-		std::transform(X.begin(), X.end(), X.begin(), g);
+        std::transform(X.begin(), X.end(), X.begin(), g);
 
 		mu_ = sigma_points_mean(X);
 
@@ -149,7 +153,7 @@ public:
 		const cross_cov covXZ = sigma_points_cross_cov<measurement_rows>(mu_, meanZ, X, Z);
 
 		measurement_cov S_inverse;
-		S.computeInverse(&S_inverse);
+		S_inverse = S.inverse();
 
 		const cross_cov K = covXZ * S_inverse;
 		
@@ -196,8 +200,9 @@ private:
 		
 		assert(L.isSPD());
 
+		
 		/*
-		std::cout << ">> L" << std::endl
+               std::cout << ">> L" << std::endl
 				  << L.getL() << std::endl
 				  << "<< L" << std::endl;
 		*/

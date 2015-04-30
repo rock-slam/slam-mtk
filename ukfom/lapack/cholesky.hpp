@@ -43,7 +43,7 @@ namespace ukfom {
 namespace lapack {
 
 // import most common Eigen types 
-USING_PART_OF_NAMESPACE_EIGEN
+using namespace Eigen;
 
 template<size_t M>
 class cholesky
