@@ -35,6 +35,8 @@
 #ifndef __UKFOM_TRAITS_DOF_HPP__
 #define __UKFOM_TRAITS_DOF_HPP__
 
+#include <Eigen/Core>
+
 namespace ukfom {
 
 	template<typename Manifold>
@@ -48,6 +50,30 @@ namespace ukfom {
 	{
 		static const int value = n;
 	};
+
+        template<typename Derived, typename T>
+        void setZero(Eigen::MatrixBase<Derived>& cov, const T& type)
+        {
+                cov.setZero();
+        }
+
+        template<typename Scalar>
+        void setZero(Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>& cov, const Eigen::Matrix<Scalar, Eigen::Dynamic, 1>& m)
+        {
+                cov.setZero(m.rows(), m.rows());
+        }
+
+        template<typename Scalar, int rows>
+        void setZero(Eigen::Matrix<Scalar, rows, Eigen::Dynamic>& cov, const Eigen::Matrix<Scalar, Eigen::Dynamic, 1>& m)
+        {
+                cov.setZero(rows, m.rows());
+        }
+
+        template<typename Scalar, int cols>
+        void setZero(Eigen::Matrix<Scalar, Eigen::Dynamic, cols>& cov, const Eigen::Matrix<Scalar, Eigen::Dynamic, 1>& m)
+        {
+                cov.setZero(m.rows(), cols);
+        }
 
 } // namespace ukfom
 

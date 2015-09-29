@@ -260,8 +260,9 @@ private:
 	sigma_points_mean(const std::vector<Matrix<scalar_type, measurement_rows, 1> > &Z) const
 	{
 		typedef Matrix<scalar_type, measurement_rows, 1> measurement;
-		
-		return std::accumulate(Z.begin(), Z.end(), measurement(measurement::Zero())) / Z.size();
+
+		measurement m(measurement::Zero(Z.begin()->rows()));
+		return std::accumulate(Z.begin(), Z.end(), m) / (scalar_type)Z.size();
 	}
 
 #ifdef VECT_H_
@@ -283,7 +284,8 @@ private:
 		typedef Matrix<scalar_type, cov_size, cov_size> cov_mat;
 		typedef Matrix<scalar_type, cov_size, 1> cov_col;
 		
-		cov_mat c(cov_mat::Zero());
+		cov_mat c;
+                setZero(c, mean);
 		
 		for (typename std::vector<T>::const_iterator Vi = V.begin(); Vi != V.end(); ++Vi)
 		{
@@ -305,7 +307,8 @@ private:
 
 		typedef Matrix<scalar_type, state::DOF, measurement_rows> cross_cov;
 
-		cross_cov c(cross_cov::Zero());
+		cross_cov c;
+                setZero(c, meanZ);
 
 		{
 			typename state_vector::const_iterator Xi = X.begin();
