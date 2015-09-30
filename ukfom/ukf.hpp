@@ -50,8 +50,8 @@
 #endif
 
 #include <Eigen/QR>
+#include <Eigen/Cholesky>
 
-#include "lapack/cholesky.hpp"
 #include "traits/dof.hpp"
 #include "util.hpp"
 
@@ -187,32 +187,21 @@ private:
 	{
 		assert(X.size() == 2 * n + 1);
 
-		lapack::cholesky<n> L(sigma);
+        Eigen::LLT<cov> lltOfSigma(sigma); // compute the Cholesky decomposition of A
+        cov L = lltOfSigma.matrixL(); // retrieve factor L  in the decomposition
 
-		if (!L.isSPD())
-		{
-			std::cerr << std::endl << "sigma is not SPD:" << std::endl
-					  << sigma << std::endl
-					  << "---" << std::endl;
-			Eigen::EigenSolver<cov> eig(sigma);
-			std::cerr << "eigen values: " << eig.eigenvalues().transpose() << std::endl;
-		}
-		
-		assert(L.isSPD());
+        /*std::cout << "L is of size "<<L.rows()<<" x "<<L.cols()<<"\n";
+        std::cout << ">> L" << std::endl
+                          << L << std::endl
+                          << "<< L" << std::endl;
+         std::cout<<"L*L^T:\n"<< L * L.transpose()<<"\n";*/
 
-		
-		/*
-               std::cout << ">> L" << std::endl
-				  << L.getL() << std::endl
-				  << "<< L" << std::endl;
-		*/
-		
 		X[0] = mu + delta;
 		for (std::size_t i = 1, j = 0; j < n; ++j)
 		{
 			//std::cout << "L.col(" << j << "): " << L.getL().col(j).transpose() << std::endl;
-			X[i++] = mu + (delta + L.getL().col(j));
-			X[i++] = mu + (delta - L.getL().col(j));
+			X[i++] = mu + (delta + L.col(j));
+			X[i++] = mu + (delta - L.col(j));
 		}
 		//print_sigma_points(X);
 	}

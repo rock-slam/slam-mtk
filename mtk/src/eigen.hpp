@@ -68,7 +68,7 @@
 #define MTK_EIGEN 200
 
 // For debugging/compatibility to Eigen3:
-#define EIGEN_ASM_COMMENT(X)  asm("#"X)
+#define EIGEN_ASM_COMMENT(X)  asm( " # " X)
 
 #endif
 
