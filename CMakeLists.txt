@@ -75,3 +75,7 @@ INSTALL(FILES
 
 install(TARGETS slom
     DESTINATION lib)
+
+SET(PKG_CONFIG_EXPORT_LIBS "-lslom")
+configure_file(mtk.pc.in mtk.pc @ONLY)
+install(FILES ${CMAKE_BINARY_DIR}/mtk.pc DESTINATION lib/pkgconfig)
