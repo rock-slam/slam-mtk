@@ -14,6 +14,7 @@
     <url>http://openslam.org/MTK.html</url>
 
     <depend package="eigen3" />
+    <depend package="boost" />
 
     <rosdep name='csparse'/>
     <rosdep name='lapack'/>
