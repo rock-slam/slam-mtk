@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 project(mtk)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_definitions(-Wall -Wno-unused-function -march=native -msse2 -mssse3 -mfpmath=sse)
 option(SLOM_BUILD_EXAMPLES "Build the example code" OFF)
 if (SLOM_BUILD_LIBONLY)

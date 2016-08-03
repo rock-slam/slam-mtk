@@ -190,6 +190,15 @@ private:
         Eigen::LLT<cov> lltOfSigma(sigma); // compute the Cholesky decomposition of A
         cov L = lltOfSigma.matrixL(); // retrieve factor L  in the decomposition
 
+        if (lltOfsigma.info() != Eigen::ComputationInfo::Success)
+        {
+            std::cerr << std::endl << "sigma is not SPD:" << std::endl
+            << sigma << std::endl
+            << "---" << std::endl;
+            Eigen::EigenSolver<cov> eig(sigma);
+            std::cerr << "eigen values: " << eig.eigenvalues().transpose() << std::endl;
+        }
+
         /*std::cout << "L is of size "<<L.rows()<<" x "<<L.cols()<<"\n";
         std::cout << ">> L" << std::endl
                           << L << std::endl
