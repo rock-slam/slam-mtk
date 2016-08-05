@@ -195,7 +195,7 @@ private:
             std::cerr << std::endl << "sigma is not SPD:" << std::endl
             << sigma << std::endl
             << "---" << std::endl;
-            Eigen::EigenSolver<cov> eig(sigma);
+            Eigen::SelfAdjointEigenSolver<cov> eig(sigma, Eigen::EigenvaluesOnly);
             std::cerr << "eigen values: " << eig.eigenvalues().transpose() << std::endl;
         }
 
