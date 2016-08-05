@@ -65,12 +65,6 @@ INSTALL(FILES
     DESTINATION include/ukfom)
 
 INSTALL(FILES
-    ukfom/lapack/cholesky.hpp
-    ukfom/lapack/invert.hpp
-    ukfom/lapack/lapack.h
-    DESTINATION include/ukfom/lapack)
-
-INSTALL(FILES
     ukfom/traits/dof.hpp
     DESTINATION include/ukfom/traits)
 
