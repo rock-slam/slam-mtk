@@ -17,7 +17,6 @@
     <depend package="boost" />
 
     <rosdep name='csparse'/>
-    <rosdep name='lapack'/>
     <rosdep name='atlas-base'/>
 
     <tags>stable</tags>

@@ -11,7 +11,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 
 FIND_PACKAGE(Boost 1.36.0 REQUIRED)
 FIND_PACKAGE(CXSparse REQUIRED) 
-FIND_PACKAGE(LAPACK)
 find_package(PkgConfig)
 pkg_check_modules(Eigen3 REQUIRED eigen3)
 
