@@ -58,7 +58,6 @@ struct vect : public Eigen::Matrix<_scalar, D, 1> {
 	enum {DOF = D};
 	typedef _scalar scalar;
 	
-	using base::operator=;
 	
 	/** Standard constructor. Sets all values to zero. */
 	vect() {
@@ -126,7 +125,6 @@ struct matrix : public Eigen::Matrix<_scalar, M, N, _Options> {
 	enum {DOF = M * N};
 	typedef _scalar scalar;
 	
-	using base::operator=;
 	
 	/** Standard constructor. Sets all values to zero. */
 	matrix() {
