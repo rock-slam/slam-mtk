@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 project(mtk)
 
 add_definitions(-Wall -Wno-unused-function -march=native -msse2 -mssse3 -mfpmath=sse)
-option(SLOM_BUILD_EXAMPLES "Build the example code" OFF)
+option(SLOM_BUILD_EXAMPLES "Build the example code" ON)
 if (SLOM_BUILD_LIBONLY)
     set(SLOM_BUILD_EXAMPLES OFF)
 endif()
