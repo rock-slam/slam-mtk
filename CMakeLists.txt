@@ -6,6 +6,7 @@ option(SLOM_BUILD_EXAMPLES "Build the example code" ON)
 if (SLOM_BUILD_LIBONLY)
     set(SLOM_BUILD_EXAMPLES OFF)
 endif()
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules)
 
@@ -20,7 +21,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} )
 
 INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
 
-ADD_LIBRARY(slom slom/src/Estimator.cpp slom/src/SparseFunction.cpp)
+ADD_LIBRARY(slom STATIC slom/src/Estimator.cpp slom/src/SparseFunction.cpp)
 
 
 TARGET_LINK_LIBRARIES(slom
@@ -37,39 +38,16 @@ IF(SLOM_BUILD_EXAMPLES)
     ADD_SUBDIRECTORY (unit_test)
 ENDIF()
 
-INSTALL(FILES
-    mtk/startIdx.hpp
-    mtk/build_manifold.hpp
-    mtk/mean_and_covar.hpp
-    DESTINATION include/mtk)
+INSTALL(DIRECTORY mtk slom ukfom
+    DESTINATION include
+    FILES_MATCHING PATTERN *.hpp
+    )
 
-INSTALL(FILES
-    mtk/src/eigen.hpp
-    mtk/src/mtkmath.hpp
-    mtk/src/SubManifold.hpp
-    mtk/src/vectview.hpp
-    DESTINATION include/mtk/src)
-
-INSTALL(FILES
-    mtk/types/pose.hpp
-    mtk/types/S2.hpp
-    mtk/types/SOn.hpp
-    mtk/types/vect.hpp
-    DESTINATION include/mtk/types)
-
-INSTALL(FILES
-    ukfom/mtkwrap.hpp
-    ukfom/util.hpp
-    ukfom/ukf.hpp
-    DESTINATION include/ukfom)
-
-INSTALL(FILES
-    ukfom/traits/dof.hpp
-    DESTINATION include/ukfom/traits)
 
 install(TARGETS slom
     DESTINATION lib)
 
-SET(PKG_CONFIG_EXPORT_LIBS "-lslom")
+SET(PKG_CONFIG_EXPORT_LIBS "-lslom ${CXSPARSE_LIBRARY}")
+SET(PKG_CONFIG_INCLUDE_DIRS "-I${CXSPARSE_INCLUDE_DIR}")
 configure_file(mtk.pc.in mtk.pc @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/mtk.pc DESTINATION lib/pkgconfig)

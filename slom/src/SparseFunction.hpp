@@ -79,6 +79,7 @@ public:
 	bool getsOptimized() const {
 		return base::ptr && base::ptr->optimize;
 	}
+	int index() const { return base::ptr->idx; }
 	template<class M2>
 	bool operator<(const VarID<M2>& v) const { return base::ptr < v.ptr; }
 	

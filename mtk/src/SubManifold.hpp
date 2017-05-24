@@ -49,7 +49,7 @@ namespace MTK {
 /**
  * @ingroup SubManifolds
  * Helper class for compound manifolds. 
- * This class wraps a manifold T and provides an enum IDX refering to the 
+ * This class wraps a manifold T and provides an enum IDX referring to the
  * index of the SubManifold within the compound manifold. 
  *  
  * Memberpointers to a submanifold can be used for @ref SubManifolds "functions accessing submanifolds".

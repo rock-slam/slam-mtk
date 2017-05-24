@@ -7,5 +7,5 @@ Name: mtk
 Description: Manifold ToolKit
 Version: @PROJECT_VERSION@
 Libs: -L${libdir} @PKG_CONFIG_EXPORT_LIBS@
-Cflags: -I${includedir}
+Cflags: -I${includedir} @PKG_CONFIG_INCLUDE_DIRS@
 
