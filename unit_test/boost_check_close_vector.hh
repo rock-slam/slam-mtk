@@ -23,8 +23,9 @@ namespace test_tools {
 
 using unit_test::readonly_property;
 #if BOOST_VERSION > 105800
-using boost::test_tools::fpc_detail::fpt_abs;
-using boost::test_tools::fpc_detail::safe_fpt_division;
+using boost::math::fpc::fpc_detail::fpt_abs;
+using boost::math::fpc::fpc_detail::safe_fpt_division;
+using boost::math::fpc::percent_tolerance_t;
 #else
 using boost::test_tools::tt_detail::fpt_abs;
 using boost::test_tools::tt_detail::safe_fpt_division;
