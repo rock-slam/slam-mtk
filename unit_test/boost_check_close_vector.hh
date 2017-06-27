@@ -16,20 +16,19 @@
 #define MTK_CHECK_CLOSE(left, right, tol) BOOST_CHECK_CLOSE(left, right, 100*tol)
 
 
+#if BOOST_VERSION > 105800
 namespace boost {
+namespace math {
+namespace fpc {
 
+using namespace boost::math::fpc_detail;
+#else
+namespace boost {
 namespace test_tools {
-    
+using namespace boost::test_tools::tt_detail;
+#endif
 
 using unit_test::readonly_property;
-#if BOOST_VERSION > 105800
-using boost::math::fpc::fpc_detail::fpt_abs;
-using boost::math::fpc::fpc_detail::safe_fpt_division;
-using boost::math::fpc::percent_tolerance_t;
-#else
-using boost::test_tools::tt_detail::fpt_abs;
-using boost::test_tools::tt_detail::safe_fpt_division;
-#endif
 
 template<class ftype, int dim1, int dim2>
 class close_at_tolerance<Eigen::Matrix<ftype, dim1, dim2> >{
@@ -72,5 +71,7 @@ public:
 
 }
 }
-
+#if BOOST_VERSION > 105800
+}
+#endif
 #endif /* BOOST_CHECK_CLOSE_VECTOR_HH_ */
