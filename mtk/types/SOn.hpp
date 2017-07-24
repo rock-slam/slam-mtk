@@ -90,11 +90,12 @@ struct SO2 : public Eigen::Rotation2D<_scalar> {
 	SO2 operator/(const SO2 &r) const {
 		return *this * r.inverse();
 	}
-	
-	//! Gets the angle as scalar.
+
+/*	//! Gets the angle as scalar.
 	operator scalar() const {
 		return base::angle();
 	}
+*/
 	
 	//! @name Manifold requirements
 	//{
@@ -106,6 +107,10 @@ struct SO2 : public Eigen::Rotation2D<_scalar> {
 	}
 	//}
 	
+	friend std::ostream& operator<<(std::ostream &os, const SO2<scalar>& ang) {
+		return os << ang.angle();
+	}
+
 	friend std::istream& operator>>(std::istream &is, SO2<scalar>& ang){
 		return is >> ang.angle();
 	}

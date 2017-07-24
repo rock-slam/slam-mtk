@@ -227,7 +227,7 @@ char* Parser<Pose2D>::outputPose(char* out, const Pose2D& pose){
 		out = ftoa(pose.pos[i], out);
 		*out++ = ' ';
 	}
-	out = ftoa(pose.orient, out);
+	out = ftoa(pose.orient.angle(), out);
 	
 	return out;
 }

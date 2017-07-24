@@ -35,7 +35,7 @@ IF(SLOM_BUILD_EXAMPLES)
     TARGET_LINK_LIBRARIES(min_example slom)
 
     ADD_SUBDIRECTORY (example)
-    ADD_SUBDIRECTORY (unit_test)
+#    ADD_SUBDIRECTORY (unit_test)
 ENDIF()
 
 INSTALL(DIRECTORY mtk slom ukfom
