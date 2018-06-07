@@ -1,0 +1,36 @@
+<package format="2">
+  <name>mtk</name>
+  <version>1.0.0</version>
+  <description>The Manifold Toolkit.
+    This package contains a recent version of the Manifold Toolkit
+    MTK is a toolkit that provides easy mechanisms to enable arbitrary algorithms to operate on manifolds.
+    The main application is the use of 3D rotations SO(3), as well as the construction of compound manifolds from arbitrary combinations of sub-manifolds.
+    We also provide a refactored version of the previously released SLoM framework which implements Gauss-Newton and Levenberg-Marquardt-based sparse least-squares
+    optimization on manifolds and a port of MTK to Matlab (MTKM).
+  </description>
+
+  <maintainer email="Christoph.Hertzberg@dfki.de">Christoph Hertzberg</maintainer>
+  <author>Christoph Hertzberg</author>
+  <author>Rene Wagner</author>
+  <author>Oliver Birbach</author>
+
+  <license>LGPL</license>
+  <url>http://openslam.org/MTK.html</url>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <build_depend>rock-cmake</build_depend>
+  <build_depend>pkg-config</build_depend>
+
+  <depend>boost</depend>
+  <depend>eigen3</depend>
+  <depend>csparse</depend>
+  <depend>atlas-base</depend>
+
+  <doc_depend>doxygen</doc_depend>
+
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
+
