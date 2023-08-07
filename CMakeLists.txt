@@ -77,7 +77,7 @@ configure_package_config_file(
     NO_SET_AND_CHECK_MACRO
     NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
-install(DIRECTORY include/${PROJECT_NAME}
+install(DIRECTORY include/${PROJECT_NAME} include/ukfom
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     FILES_MATCHING PATTERN "*.hpp"
 )
