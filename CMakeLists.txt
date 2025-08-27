@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.5)
 project(mtk VERSION 1.0.0)
 
-add_definitions(-Wall -Wno-unused-function -march=native -msse2 -mssse3 -mfpmath=sse)
+add_definitions(-Wall -Wno-unused-function)
+if (NOT OPT_TARGET_ARCH)
+    add_definitions(-march=native)
+else()
+    add_definitions(-march=${OPT_TARGET_ARCH})
+endif()
+
 option(SLOM_BUILD_EXAMPLES "Build the example code" ON)
 
 if(SLOM_BUILD_LIBONLY)
